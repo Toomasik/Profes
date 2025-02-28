@@ -77,7 +77,6 @@ fun Home() {
 
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                println()
                 IconButton(onClick = {
                     context.startActivity(Intent(context, MenuActivity::class.java))
                 }) {
