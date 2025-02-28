@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">JetComp</string>
+    <string name="title_activity_cart">CartActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_card">CardActivity</string>
+</resources>
