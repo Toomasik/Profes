@@ -46,7 +46,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
-import com.example.jetcomp.ui.theme.JetCompTheme
 
 class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +57,7 @@ class HomeActivity : ComponentActivity() {
     }
 }
 
+@Preview
 @Composable
 fun Home() {
     val context = LocalContext.current
@@ -76,7 +76,9 @@ fun Home() {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = { }) {
+                IconButton(onClick = {
+                    context.startActivity(Intent(context, MenuActivity::class.java))
+                }) {
                     Image(
                         painter = painterResource(R.drawable.clock), contentDescription = "Menu"
                     )
@@ -120,7 +122,9 @@ fun Home() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 21.dp)
+
+                    .padding(top = 21.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 val textFieldValue = remember { mutableStateOf("") }
                 TextField(
@@ -291,7 +295,7 @@ fun Home() {
         }
         Row(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth().height(190.dp)
                 .paint(painter = painterResource(R.drawable.footer)),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
@@ -348,7 +352,7 @@ fun Home() {
 
 @Composable
 fun BootView(seller: String, name: String, price: String) {
-
+    val context = LocalContext.current
     Box(contentAlignment = Alignment.BottomEnd) {
         IconButton(
             onClick = {},
@@ -399,14 +403,14 @@ fun BootView(seller: String, name: String, price: String) {
                 modifier = Modifier
                     .size(width = 142.dp, height = 70.dp)
                     .offset(0.dp, -22.dp).clickable {
+                    context.startActivity(Intent(context, CardActivity::class.java))
 
 
 
-                        println(222)
 
 
 
-                                                    },
+                    },
                 painter = painterResource(R.drawable.boot),
                 contentDescription = null
             )
