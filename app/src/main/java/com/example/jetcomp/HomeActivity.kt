@@ -74,8 +74,10 @@ fun Home() {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,
+
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                println()
                 IconButton(onClick = {
                     context.startActivity(Intent(context, MenuActivity::class.java))
                 }) {
