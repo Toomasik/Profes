@@ -180,7 +180,7 @@ fun OnBoardingScreen(pagerState: PagerState, title: String, subTitle: String) {
                 coroutineScope.launch {
                     pagerState.scrollToPage(pagerState.currentPage + 1)
                 } else {
-                    val intent = Intent(context, HomeActivity::class.java)
+                    val intent = Intent(context, LogInActivity::class.java)
                     context.startActivity(intent)
                 }
             },

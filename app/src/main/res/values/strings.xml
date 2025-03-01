@@ -7,4 +7,6 @@
     <string name="title_activity_menu">MenuActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_edit_prof">EditProfActivity</string>
+    <string name="title_activity_log_in">LogInActivity</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
 </resources>
