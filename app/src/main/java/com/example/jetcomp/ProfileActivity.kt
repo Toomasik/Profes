@@ -153,14 +153,14 @@ fun Profile(){
                     tint = disable
                 )
             }
-            IconButton(onClick = { }) {
+            IconButton(onClick = { context.startActivity(Intent(context, FavActivity::class.java))}) {
                 Icon(
                     painter = painterResource(R.drawable.favorite), contentDescription = "Menu",
                     tint = Color(0xFF707B81)
                 )
             }
             IconButton(
-                onClick = { }, modifier = Modifier
+                onClick = {context.startActivity(Intent(context, CartActivity::class.java)) }, modifier = Modifier
                     .offset(y = -30.dp)
                     .background(
                         color = Color(0xFF48B2E7),

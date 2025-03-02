@@ -184,7 +184,9 @@ fun Menu() {
                 "Выйти",
                 fontSize = 16.sp,
                 color = white,
-                modifier = Modifier.padding(start = 25.dp)
+                modifier = Modifier.padding(start = 25.dp).clickable {
+                    context.startActivity(Intent(context, LogInActivity::class.java))
+                }
             )
         }
     }

@@ -45,6 +45,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import com.example.jetcomp.ui.theme.red
 
 class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -197,7 +198,7 @@ fun Home() {
                 ) {
                     Button(
 
-                        onClick = {},
+                        onClick = {context.startActivity(Intent(context, CategoryActivity::class.java))},
                         shape = RoundedCornerShape(8.dp),
                         colors = ButtonDefaults.buttonColors(Color.White),
                         modifier = Modifier
@@ -213,7 +214,7 @@ fun Home() {
 
                     Button(
 
-                        onClick = {},
+                        onClick = {context.startActivity(Intent(context, CategoryActivity::class.java))},
                         shape = RoundedCornerShape(8.dp),
                         colors = ButtonDefaults.buttonColors(Color.White),
                         modifier = Modifier
@@ -230,7 +231,7 @@ fun Home() {
 
                     Button(
 
-                        onClick = {},
+                        onClick = {context.startActivity(Intent(context, CategoryActivity::class.java))},
                         shape = RoundedCornerShape(8.dp),
                         colors = ButtonDefaults.buttonColors(Color.White),
                         modifier = Modifier
@@ -256,7 +257,9 @@ fun Home() {
                     Text("Популярное", fontSize = 16.sp, modifier = Modifier.weight(1F))
                     Text(
                         "Все",
-                        modifier = Modifier.align(Alignment.Bottom),
+                        modifier = Modifier.align(Alignment.Bottom).clickable {
+                            context.startActivity(Intent(context, PopularActivity::class.java))
+                        },
 
                         fontSize = 12.sp,
                         color = Color(0xff48B2E7)
@@ -306,14 +309,14 @@ fun Home() {
                     tint = Color(0xFF48B2E7)
                 )
             }
-            IconButton(onClick = { }) {
+            IconButton(onClick = {context.startActivity(Intent(context, FavActivity::class.java)) }) {
                 Icon(
                     painter = painterResource(R.drawable.favorite), contentDescription = "Menu",
                     tint = Color(0xFF707B81)
                 )
             }
             IconButton(
-                onClick = { }, modifier = Modifier
+                onClick = { context.startActivity(Intent(context, CartActivity::class.java))}, modifier = Modifier
                     .offset(y = -30.dp)
                     .background(
                         color = Color(0xFF48B2E7),
@@ -330,13 +333,13 @@ fun Home() {
 
                     )
             }
-            IconButton(onClick = { }) {
+            IconButton(onClick = {context.startActivity(Intent(context, NotificationsActivity::class.java)) }) {
                 Icon(
                     painter = painterResource(R.drawable.notification), contentDescription = "Menu",
                     tint = Color(0xFF707B81)
                 )
             }
-            IconButton(onClick = { }) {
+            IconButton(onClick = {context.startActivity(Intent(context, ProfileActivity::class.java)) }) {
                 Icon(
                     painter = painterResource(R.drawable.profile), contentDescription = "Menu",
                     tint = Color(0xFF707B81)
@@ -354,8 +357,11 @@ fun Home() {
 fun BootView(seller: String, name: String, price: String) {
     val context = LocalContext.current
     Box(contentAlignment = Alignment.BottomEnd) {
+        val isInCart = remember { mutableStateOf(false) }
+        val isFav = remember { mutableStateOf(false) }
         IconButton(
-            onClick = {},
+
+            onClick = {isInCart.value = !isInCart.value},
             modifier = Modifier
                 .size(36.dp)
                 .background(
@@ -367,9 +373,10 @@ fun BootView(seller: String, name: String, price: String) {
 
         ) {
             Icon(
-                painter = painterResource(R.drawable.add),
+                painter = painterResource(if (isInCart.value) R.drawable.cart else R.drawable.add),
                 contentDescription = null,
-                tint = Color.White
+                tint = Color.White,
+                modifier = Modifier.size(16.dp)
             )
         }
 
@@ -386,30 +393,25 @@ fun BootView(seller: String, name: String, price: String) {
 
 
             IconButton(
-                onClick = {},
+                onClick = {isFav.value = !isFav.value},
                 modifier = Modifier
                     .size(36.dp)
                     .background(
                         Color(0xFFF7F7F9), shape = RoundedCornerShape(50)
                     )
-                    .padding(8.dp)
+                    .padding(8.dp).zIndex(2f)
             ) {
                 Icon(
-                    painter = painterResource(R.drawable.favorite),
+                    painter = painterResource(if (isFav.value) R.drawable.favorite_fill else R.drawable.favorite),
                     contentDescription = null,
+                    tint = if (isFav.value) red else Color.Black
                 )
             }
             Image(
                 modifier = Modifier
                     .size(width = 142.dp, height = 70.dp)
                     .offset(0.dp, -22.dp).clickable {
-                    context.startActivity(Intent(context, CardActivity::class.java))
-
-
-
-
-
-
+                        context.startActivity(Intent(context, CardActivity::class.java))
                     },
                 painter = painterResource(R.drawable.boot),
                 contentDescription = null

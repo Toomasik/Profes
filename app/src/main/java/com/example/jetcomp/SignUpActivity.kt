@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -34,6 +35,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -57,12 +60,14 @@ class SignUpActivity : ComponentActivity() {
 
 @Preview
 @Composable
-fun SignUp(){
+fun SignUp() {
     val context = LocalContext.current
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .background(white)
-        .padding(20.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(white)
+            .padding(20.dp)
+    ) {
         val name = remember { mutableStateOf("") }
         val email = remember { mutableStateOf("") }
         val password = remember { mutableStateOf("") }
@@ -127,7 +132,8 @@ fun SignUp(){
             )
         )
         Text("Пароль", fontSize = 16.sp)
-        TextField(value = password.value,
+        TextField(
+            value = password.value,
             onValueChange = { newText -> password.value = newText },
             modifier = Modifier
                 .fillMaxWidth()
@@ -146,12 +152,30 @@ fun SignUp(){
                 focusedContainerColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent
-            ))
-        Row(modifier = Modifier.padding(bottom = 30.dp).width(240.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(painter = painterResource(R.drawable.policy_check), contentDescription = null, modifier = Modifier.padding(end = 11.dp).size(24.dp).background(
-                background, RoundedCornerShape(50)
-            ).padding(4.dp))
-            Text("Даю согласие на обработку персональных данных", textDecoration = TextDecoration.Underline)
+            ), visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+        )
+        Row(
+            modifier = Modifier
+                .padding(bottom = 30.dp)
+                .width(240.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.policy_check),
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(end = 11.dp)
+                    .size(24.dp)
+                    .background(
+                        background, RoundedCornerShape(50)
+                    )
+                    .padding(4.dp)
+            )
+            Text(
+                "Даю согласие на обработку персональных данных",
+                textDecoration = TextDecoration.Underline
+            )
         }
         Button(
             onClick = {},
@@ -174,9 +198,15 @@ fun SignUp(){
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
             Text("Есть аккаунт?", fontSize = 16.sp)
-            Text(" Войти", fontSize = 16.sp, fontWeight = FontWeight.Bold, modifier = Modifier.clickable { context.startActivity(
-                Intent(context, LogInActivity::class.java)
-            ) })
+            Text(
+                " Войти",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.clickable {
+                    context.startActivity(
+                        Intent(context, LogInActivity::class.java)
+                    )
+                })
         }
     }
 }

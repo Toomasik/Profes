@@ -9,4 +9,8 @@
     <string name="title_activity_edit_prof">EditProfActivity</string>
     <string name="title_activity_log_in">LogInActivity</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_fav">FavActivity</string>
+    <string name="title_activity_popular">PopularActivity</string>
+    <string name="title_activity_category">CategoryActivity</string>
+    <string name="title_activity_notifications">NotificationsActivity</string>
 </resources>
