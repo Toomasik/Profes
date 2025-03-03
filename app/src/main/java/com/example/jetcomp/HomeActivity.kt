@@ -61,14 +61,11 @@ class HomeActivity : ComponentActivity() {
 @Composable
 fun Home() {
     val context = LocalContext.current
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xFFF7F7F9))
-    ) {
+
         Column(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
+                .background(Color(0xFFF7F7F9))
                 .padding(20.dp)
         ) {
             Row(
@@ -296,58 +293,59 @@ fun Home() {
 
 
         }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth().height(190.dp)
-                .paint(painter = painterResource(R.drawable.footer)),
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            IconButton(onClick = { }) {
-                Icon(
-                    painter = painterResource(R.drawable.home), contentDescription = "Menu",
-                    tint = Color(0xFF48B2E7)
-                )
-            }
-            IconButton(onClick = {context.startActivity(Intent(context, FavActivity::class.java)) }) {
-                Icon(
-                    painter = painterResource(R.drawable.favorite), contentDescription = "Menu",
-                    tint = Color(0xFF707B81)
-                )
-            }
-            IconButton(
-                onClick = { context.startActivity(Intent(context, CartActivity::class.java))}, modifier = Modifier
-                    .offset(y = -30.dp)
-                    .background(
-                        color = Color(0xFF48B2E7),
-                        shape = RoundedCornerShape(50)
-                    )
-                    .size(56.dp)
-                    .padding(16.dp)
-
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomStart){
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth().height(190.dp)
+                    .paint(painter = painterResource(R.drawable.footer)),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(
-                    painter = painterResource(R.drawable.bag),
-                    contentDescription = "Menu",
-                    tint = Color.White,
-
+                IconButton(onClick = { }) {
+                    Icon(
+                        painter = painterResource(R.drawable.home), contentDescription = "Menu",
+                        tint = Color(0xFF48B2E7)
                     )
-            }
-            IconButton(onClick = {context.startActivity(Intent(context, NotificationsActivity::class.java)) }) {
-                Icon(
-                    painter = painterResource(R.drawable.notification), contentDescription = "Menu",
-                    tint = Color(0xFF707B81)
-                )
-            }
-            IconButton(onClick = {context.startActivity(Intent(context, ProfileActivity::class.java)) }) {
-                Icon(
-                    painter = painterResource(R.drawable.profile), contentDescription = "Menu",
-                    tint = Color(0xFF707B81)
-                )
+                }
+                IconButton(onClick = {context.startActivity(Intent(context, FavActivity::class.java)) }) {
+                    Icon(
+                        painter = painterResource(R.drawable.favorite), contentDescription = "Menu",
+                        tint = Color(0xFF707B81)
+                    )
+                }
+                IconButton(
+                    onClick = { context.startActivity(Intent(context, CartActivity::class.java))}, modifier = Modifier
+                        .offset(y = -30.dp)
+                        .background(
+                            color = Color(0xFF48B2E7),
+                            shape = RoundedCornerShape(50)
+                        )
+                        .size(56.dp)
+                        .padding(16.dp)
+
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.bag),
+                        contentDescription = "Menu",
+                        tint = Color.White,
+
+                        )
+                }
+                IconButton(onClick = {context.startActivity(Intent(context, NotificationsActivity::class.java)) }) {
+                    Icon(
+                        painter = painterResource(R.drawable.notification), contentDescription = "Menu",
+                        tint = Color(0xFF707B81)
+                    )
+                }
+                IconButton(onClick = {context.startActivity(Intent(context, ProfileActivity::class.java)) }) {
+                    Icon(
+                        painter = painterResource(R.drawable.profile), contentDescription = "Menu",
+                        tint = Color(0xFF707B81)
+                    )
+                }
             }
         }
 
-    }
 
 
 }

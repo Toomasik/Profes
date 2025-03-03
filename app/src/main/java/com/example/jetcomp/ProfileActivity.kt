@@ -34,6 +34,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -79,7 +80,7 @@ fun Profile(){
                 }
 
                 Text(
-                    fontSize = 16.sp, text = "Профиль", modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
+                    fontSize = 16.sp, text = "Профиль", modifier = Modifier.weight(1f), textAlign = TextAlign.Center, fontFamily = FontFamily.Serif)
                 IconButton(
                     onClick = {
                         val intent = Intent(context, EditProfActivity::class.java)

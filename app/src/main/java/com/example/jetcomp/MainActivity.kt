@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,6 +21,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Scaffold
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -34,6 +36,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.jetcomp.ui.theme.disable
 import com.example.jetcomp.ui.theme.text
 import com.example.jetcomp.ui.theme.white
@@ -43,15 +49,33 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
-            OnBoarding()
+            Scaffold(){ innerPadding ->
+                Column( modifier = Modifier.padding(innerPadding)) {
+                    val nav = rememberNavController()
+                    NavHost(navController = nav, startDestination = "start") {
+                        composable("start") {
+                            OnBoarding(nav)
+                        }
+                        composable("home") {
+                            Home()
+                        }
+
+                    }
+                }
+            }
+
+
         }
     }
 }
 
 
 @Composable
-fun OnBoarding() {
+fun OnBoarding(nav: NavController) {
+
+    val coroutineScope = rememberCoroutineScope()
     val gradient =
         Brush.verticalGradient(listOf(Color(0xff48B2E7), Color(0xff44A9DC), Color(0xff2B6B8B)))
     val pagerState = rememberPagerState { 3 }
@@ -71,7 +95,14 @@ fun OnBoarding() {
                     if (pagerState.currentPage == 1) "Начнем путешествие" else "У вас есть сила, чтобы"
                 val subTitle =
                     if (pagerState.currentPage == 1) "Умная, великолепная и модная коллекция Изучите сейчас" else "В вашей комнате много красивых и привлекательных растений"
-                OnBoardingScreen(pagerState, title, subTitle)
+                OnBoardingScreen(pagerState, title, subTitle) {
+                    if (pagerState.currentPage == 1)
+                        coroutineScope.launch {
+                            pagerState.scrollToPage(pagerState.currentPage + 1)
+                        } else {
+                        nav.navigate("home")
+                    }
+                }
             }
         }
 
@@ -133,7 +164,12 @@ fun OnBoardingScreenOne(pagerState: PagerState) {
 }
 
 @Composable
-fun OnBoardingScreen(pagerState: PagerState, title: String, subTitle: String) {
+fun OnBoardingScreen(
+    pagerState: PagerState,
+    title: String,
+    subTitle: String,
+    onNextButtonClick: () -> Unit
+) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     Column(
@@ -176,13 +212,8 @@ fun OnBoardingScreen(pagerState: PagerState, title: String, subTitle: String) {
         )
         Button(
             onClick = {
-                if (pagerState.currentPage == 1)
-                coroutineScope.launch {
-                    pagerState.scrollToPage(pagerState.currentPage + 1)
-                } else {
-                    val intent = Intent(context, LogInActivity::class.java)
-                    context.startActivity(intent)
-                }
+
+                onNextButtonClick()
             },
             Modifier
                 .padding(end = 20.dp, start = 20.dp, top = 95.dp)
