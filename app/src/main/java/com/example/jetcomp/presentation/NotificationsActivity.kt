@@ -1,15 +1,11 @@
-package com.example.jetcomp
+package com.example.jetcomp.presentation
 
-import android.content.Intent
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,44 +13,30 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
-import com.example.jetcomp.ui.theme.JetCompTheme
+import androidx.navigation.NavController
+import com.example.jetcomp.R
 import com.example.jetcomp.ui.theme.background
 import com.example.jetcomp.ui.theme.hint
 import com.example.jetcomp.ui.theme.white
 
-class NotificationsActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            Notifications()
-        }
-    }
-}
-
-@Preview
 @Composable
-fun Notifications() {
-    val context = LocalContext.current
+fun Notifications(nav: NavController) {
     Column(modifier = Modifier
         .fillMaxSize()
         .background(white)
@@ -65,8 +47,7 @@ fun Notifications() {
         ) {
             IconButton(
                 onClick = {
-                    val intent = Intent(context, MenuActivity::class.java)
-                    context.startActivity(intent)
+                    nav.navigate("menu")
                 },
                 modifier = Modifier
                     .zIndex(2f)
@@ -93,6 +74,7 @@ fun Notifications() {
                     "27.01.2024, 15:42"
                 )
             }
+            item { Spacer(modifier = Modifier.height(100.dp)) }
         }
 
 
@@ -101,7 +83,7 @@ fun Notifications() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .paint(painter = painterResource(R.drawable.footer)),
+                .paint(painter = painterResource(R.drawable.footer), contentScale = ContentScale.FillWidth),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -112,12 +94,7 @@ fun Notifications() {
                 )
             }
             IconButton(onClick = {
-                context.startActivity(
-                    Intent(
-                        context,
-                        FavActivity::class.java
-                    )
-                )
+                nav.navigate("fav")
             }) {
                 Icon(
                     painter = painterResource(R.drawable.favorite), contentDescription = "Menu",
@@ -125,7 +102,7 @@ fun Notifications() {
                 )
             }
             IconButton(
-                onClick = { context.startActivity(Intent(context, CartActivity::class.java)) },
+                onClick = { nav.navigate("cart") },
                 modifier = Modifier
                     .offset(y = -30.dp)
                     .background(
@@ -144,12 +121,7 @@ fun Notifications() {
                     )
             }
             IconButton(onClick = {
-                context.startActivity(
-                    Intent(
-                        context,
-                        NotificationsActivity::class.java
-                    )
-                )
+                nav.navigate("notification")
             }) {
                 Icon(
                     painter = painterResource(R.drawable.notification), contentDescription = "Menu",
@@ -157,12 +129,7 @@ fun Notifications() {
                 )
             }
             IconButton(onClick = {
-                context.startActivity(
-                    Intent(
-                        context,
-                        ProfileActivity::class.java
-                    )
-                )
+                nav.navigate("profile")
             }) {
                 Icon(
                     painter = painterResource(R.drawable.profile), contentDescription = "Menu",

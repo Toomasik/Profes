@@ -13,62 +13,17 @@
         android:theme="@style/Theme.JetComp"
         tools:targetApi="31">
         <activity
-            android:name=".NotificationsActivity"
+            android:name=".CheckoutActivity"
             android:exported="false"
-            android:label="@string/title_activity_notifications"
+            android:label="@string/title_activity_checkout"
             android:theme="@style/Theme.JetComp" />
         <activity
-            android:name=".CategoryActivity"
-            android:exported="false"
-            android:label="@string/title_activity_category"
-            android:theme="@style/Theme.JetComp" />
-        <activity
-            android:name=".PopularActivity"
-            android:exported="false"
-            android:label="@string/title_activity_popular"
-            android:theme="@style/Theme.JetComp" />
-        <activity
-            android:name=".FavActivity"
-            android:exported="false"
-            android:label="@string/title_activity_fav"
-            android:theme="@style/Theme.JetComp" />
-        <activity
-            android:name=".SignUpActivity"
-            android:exported="false"
-            android:label="@string/title_activity_sign_up"
-            android:theme="@style/Theme.JetComp" />
-        <activity
-            android:name=".LogInActivity"
-            android:exported="false"
-            android:label="@string/title_activity_log_in"
-            android:theme="@style/Theme.JetComp" />
-        <activity
-            android:name=".EditProfActivity"
-            android:exported="false"
-            android:label="@string/title_activity_edit_prof"
-            android:theme="@style/Theme.JetComp" />
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="false"
-            android:label="@string/title_activity_profile"
-            android:theme="@style/Theme.JetComp" />
-        <activity
-            android:name=".MenuActivity"
-            android:exported="false"
-            android:label="@string/title_activity_menu"
-            android:theme="@style/Theme.JetComp" />
-        <activity
-            android:name=".CardActivity"
-            android:exported="false"
-            android:label="@string/title_activity_card"
-            android:theme="@style/Theme.JetComp" />
-        <activity
-            android:name=".HomeActivity"
+            android:name=".presentation.HomeActivity"
             android:exported="false"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.JetComp" />
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.JetComp">
@@ -78,11 +33,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".CartActivity"
-            android:exported="false"
-            android:label="@string/title_activity_cart"
-            android:theme="@style/Theme.JetComp" />
     </application>
 
 </manifest>

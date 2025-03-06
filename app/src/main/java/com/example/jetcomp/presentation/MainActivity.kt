@@ -1,6 +1,5 @@
-package com.example.jetcomp
+package com.example.jetcomp.presentation
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -31,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -40,6 +38,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.jetcomp.R
 import com.example.jetcomp.ui.theme.disable
 import com.example.jetcomp.ui.theme.text
 import com.example.jetcomp.ui.theme.white
@@ -59,7 +58,43 @@ class MainActivity : ComponentActivity() {
                             OnBoarding(nav)
                         }
                         composable("home") {
-                            Home()
+                            Home(nav)
+                        }
+                        composable("fav") {
+                            Favorite(nav)
+                        }
+                        composable("card") {
+                            CardAct(nav)
+                        }
+                        composable("cart") {
+                            Cart(nav)
+                        }
+                        composable("category") {
+                            Category(nav)
+                        }
+                        composable("editProfile") {
+                            EditProf(nav)
+                        }
+                        composable("logIn") {
+                            LogIn(nav)
+                        }
+                        composable("Menu") {
+                            Menu(nav)
+                        }
+                        composable("notification") {
+                            Notifications(nav)
+                        }
+                        composable("popular") {
+                            Popular(nav)
+                        }
+                        composable("profile") {
+                            Profile(nav)
+                        }
+                        composable("signUp") {
+                            SignUp(nav)
+                        }
+                        composable("checkout") {
+                            Checkout(nav)
                         }
 
                     }
@@ -170,8 +205,6 @@ fun OnBoardingScreen(
     subTitle: String,
     onNextButtonClick: () -> Unit
 ) {
-    val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.padding(top = 80.dp)

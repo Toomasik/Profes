@@ -1,10 +1,5 @@
-package com.example.jetcomp
+package com.example.jetcomp.presentation
 
-import android.content.Intent
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -24,28 +19,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.jetcomp.R
 import com.example.jetcomp.ui.theme.accent
 import com.example.jetcomp.ui.theme.white
 
-class MenuActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            Menu()
-        }
-    }
-}
-
-@Preview
 @Composable
-fun Menu() {
-    val context = LocalContext.current
+fun Menu(nav: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -82,7 +65,7 @@ fun Menu() {
                 fontSize = 16.sp,
                 color = white,
                 modifier = Modifier.padding(start = 25.dp).clickable {
-                    context.startActivity(Intent(context, ProfileActivity::class.java))
+                    nav.navigate("profile")
                 }
             )
         }
@@ -96,7 +79,7 @@ fun Menu() {
                 fontSize = 16.sp,
                 color = white,
                 modifier = Modifier.padding(start = 25.dp).clickable {
-                    context.startActivity(Intent(context, CartActivity::class.java))
+                    nav.navigate("cart")
                 }
             )
         }
@@ -185,7 +168,7 @@ fun Menu() {
                 fontSize = 16.sp,
                 color = white,
                 modifier = Modifier.padding(start = 25.dp).clickable {
-                    context.startActivity(Intent(context, LogInActivity::class.java))
+                    nav.navigate("logIn")
                 }
             )
         }
