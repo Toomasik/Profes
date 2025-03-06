@@ -1,65 +1,42 @@
-package com.example.jetcomp
+package com.example.jetcomp.presentation
 
-import android.content.Intent
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.jetcomp.ui.theme.JetCompTheme
+import androidx.navigation.NavController
+import com.example.jetcomp.R
 import com.example.jetcomp.ui.theme.accent
 import com.example.jetcomp.ui.theme.background
 import com.example.jetcomp.ui.theme.disable
 import com.example.jetcomp.ui.theme.red
 import com.example.jetcomp.ui.theme.white
 
-class FavActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            Favorite()
-        }
-    }
-}
-
-@Preview
 @Composable
-fun Favorite(){
-    val context = LocalContext.current
+fun Favorite(nav: NavController){
     Column(modifier = Modifier.fillMaxSize().background(background).padding(20.dp)) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -68,7 +45,7 @@ fun Favorite(){
             verticalAlignment = Alignment.CenterVertically
         ) {
             IconButton(onClick = {
-                context.startActivity(Intent(context, HomeActivity::class.java))
+                nav.navigate("home")
             }, modifier = Modifier.background(white, RoundedCornerShape(50))) {
                 Icon(
                     painter = painterResource(R.drawable.back), contentDescription = "Menu"
@@ -79,8 +56,7 @@ fun Favorite(){
 
             IconButton(
                 onClick = {
-                    val intent = Intent(context, CartActivity::class.java)
-                    context.startActivity(intent)
+                    nav.navigate("cart")
                 }, modifier = Modifier
                     .size(44.dp)
                     .background(
@@ -98,8 +74,9 @@ fun Favorite(){
         LazyVerticalGrid(columns = GridCells.Fixed(2),
             verticalArrangement = Arrangement.spacedBy(15.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.padding(vertical = 20.dp).height(700.dp))  {
-            items(8){ BootView("Best Seller", "Nike Air Max", "₽752.00") }
+            modifier = Modifier.padding(vertical = 20.dp))  {
+            items(8){ BootView("Best Seller", "Nike Air Max", "₽752.00", nav) }
+            item { Spacer(Modifier.height(100.dp)) }
         }
 
     }
@@ -107,11 +84,11 @@ fun Favorite(){
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .paint(painter = painterResource(R.drawable.footer)),
+                .paint(painter = painterResource(R.drawable.footer), contentScale = ContentScale.FillWidth),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = {context.startActivity(Intent(context, HomeActivity::class.java))}) {
+            IconButton(onClick = {nav.navigate("home")}) {
                 Icon(
                     painter = painterResource(R.drawable.home), contentDescription = "Menu",
                     tint = disable
@@ -124,7 +101,7 @@ fun Favorite(){
                 )
             }
             IconButton(
-                onClick = {context.startActivity(Intent(context, CartActivity::class.java))}, modifier = Modifier
+                onClick = {nav.navigate("cart")}, modifier = Modifier
                     .offset(y = -30.dp)
                     .background(
                         color = Color(0xFF48B2E7),
@@ -141,13 +118,13 @@ fun Favorite(){
 
                     )
             }
-            IconButton(onClick = {context.startActivity(Intent(context, NotificationsActivity::class.java)) }) {
+            IconButton(onClick = {nav.navigate("notification") }) {
                 Icon(
                     painter = painterResource(R.drawable.notification), contentDescription = "Menu",
                     tint = Color(0xFF707B81)
                 )
             }
-            IconButton(onClick = { context.startActivity(Intent(context, ProfileActivity::class.java))}) {
+            IconButton(onClick = {nav.navigate("profile")}) {
                 Icon(
                     painter = painterResource(R.drawable.profile), contentDescription = "Menu",
                     tint = Color(0xFF707B81)

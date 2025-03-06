@@ -1,10 +1,5 @@
-package com.example.jetcomp
+package com.example.jetcomp.presentation
 
-import android.content.Intent
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,7 +17,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -37,29 +31,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.jetcomp.ui.theme.JetCompTheme
+import androidx.navigation.NavController
+import com.example.jetcomp.R
 import com.example.jetcomp.ui.theme.accent
 import com.example.jetcomp.ui.theme.background
 import com.example.jetcomp.ui.theme.disable
 import com.example.jetcomp.ui.theme.text
 import com.example.jetcomp.ui.theme.white
 
-class EditProfActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            EditProf()
-        }
-    }
-}
-
-@Preview
 @Composable
-fun EditProf() {
+fun EditProf(nav: NavController) {
     val context = LocalContext.current
     val name = remember { mutableStateOf("") }
     val lastname = remember { mutableStateOf("") }
@@ -75,7 +58,7 @@ fun EditProf() {
         ) {
             Button(
                 onClick = {
-                    context.startActivity(Intent(context, ProfileActivity::class.java))
+                    nav.navigate("profile")
                 },
                 modifier = Modifier
                     .background(accent, RoundedCornerShape(50))
@@ -226,7 +209,7 @@ fun EditProf() {
         ) {
 
             IconButton(onClick = {
-                context.startActivity(Intent(context, HomeActivity::class.java))
+                nav.navigate("home")
             }) {
                 Icon(
                     painter = painterResource(R.drawable.home), contentDescription = "Menu",

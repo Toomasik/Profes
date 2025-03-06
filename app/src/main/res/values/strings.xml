@@ -3,14 +3,5 @@
     <string name="title_activity_cart">CartActivity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_home">HomeActivity</string>
-    <string name="title_activity_card">CardActivity</string>
-    <string name="title_activity_menu">MenuActivity</string>
-    <string name="title_activity_profile">ProfileActivity</string>
-    <string name="title_activity_edit_prof">EditProfActivity</string>
-    <string name="title_activity_log_in">LogInActivity</string>
-    <string name="title_activity_sign_up">SignUpActivity</string>
-    <string name="title_activity_fav">FavActivity</string>
-    <string name="title_activity_popular">PopularActivity</string>
-    <string name="title_activity_category">CategoryActivity</string>
-    <string name="title_activity_notifications">NotificationsActivity</string>
+    <string name="title_activity_checkout">CheckoutActivity</string>
 </resources>

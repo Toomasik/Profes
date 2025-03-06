@@ -1,9 +1,5 @@
-package com.example.jetcomp
+package com.example.jetcomp.presentation
 
-import android.content.Intent
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -28,12 +24,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.example.jetcomp.R
 import com.example.jetcomp.ui.theme.accent
 import com.example.jetcomp.ui.theme.background
 import com.example.jetcomp.ui.theme.darkbg
@@ -42,19 +38,8 @@ import com.example.jetcomp.ui.theme.text
 import com.example.jetcomp.ui.theme.white
 
 
-class CardActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            Card()
-        }
-    }
-}
-
-@Preview
 @Composable
-fun Card() {
-    val context = LocalContext.current
+fun CardAct(nav: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -64,7 +49,7 @@ fun Card() {
         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             IconButton(
                 onClick = {
-                    context.startActivity(Intent(context, HomeActivity::class.java))
+                    nav.navigate("home")
                 },
                 colors = IconButtonDefaults.iconButtonColors(Color.Transparent)
             ) {
@@ -199,15 +184,20 @@ fun Card() {
                 .padding(top = 5.dp),
             fontSize = 14.sp
         )
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 65.dp), verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 65.dp), verticalAlignment = Alignment.CenterVertically
+        ) {
             IconButton(
                 onClick = {},
                 colors = IconButtonDefaults.iconButtonColors(Color.Transparent),
-                modifier = Modifier.padding(end = 18.dp).background(
-                    darkbg, RoundedCornerShape(50)
-                ).size(52.dp)
+                modifier = Modifier
+                    .padding(end = 18.dp)
+                    .background(
+                        darkbg, RoundedCornerShape(50)
+                    )
+                    .size(52.dp)
             ) {
                 Icon(
                     painter = painterResource(R.drawable.favorite),
@@ -224,12 +214,17 @@ fun Card() {
                     ),
                 contentPadding = PaddingValues(15.dp)
             ) {
-                    Icon(
-                        painter = painterResource(R.drawable.bag),
-                        contentDescription = null,
-                        tint = white,
-                    )
-                    Text("В корзину", textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth(), fontSize = 14.sp)
+                Icon(
+                    painter = painterResource(R.drawable.bag),
+                    contentDescription = null,
+                    tint = white,
+                )
+                Text(
+                    "В корзину",
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth(),
+                    fontSize = 14.sp
+                )
 
             }
         }
